@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <title>  | Documentation</title>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet'>
+  <link href='assets/style.css' rel='stylesheet'>
+  <link href='assets/github.css' rel='stylesheet'>
+  <link href='assets/split.css' rel='stylesheet'>
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'></h3>
+          <div class='mb1'><code></code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#getstatsimage'
+                  class="">
+                  getStatsImage
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getstatssingleband'
+                  class="">
+                  getStatsSingleBand
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#setreadable'
+                  class="">
+                  setReadable
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#makefeaturesnew'
+                  class="">
+                  makeFeaturesNew
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#makehumanreadablefromvalues'
+                  class="">
+                  makeHumanReadableFromValues
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getstatsimage'>
+      getStatsImage
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Computes stats on a single band of input image with any number of bands and write the outputs to a feature collection. Paramters inlude:
+image: the image to generate stats of
+statsBand: the name of the band to calculate stats of
+groupBy: optional, a band to group the stats band by (e.g. carbon counts grouped by land cover)
+reducer: the name of the reducer to apply. currently supported:sum, count, mean
+region: the region to calculate stats
+scale: the scale to calculate stats
+crs: optional, a crs for the stats defaults to epsg 4326</p>
+
+    <div class='pre p1 fill-light mt0'>getStatsImage(requestDict: {image: ee.Image, statsBand: str, groupBy: str, reducer: str, region: ee.Geometry, scale: int, crs: str}): any</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>requestDict</span> <code class='quiet'>({image: ee.Image, statsBand: str, groupBy: str, reducer: str, region: ee.Geometry, scale: int, crs: str})</code>
+	    A dictionary of paramters to define what stats should be computed.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        ee.FeatureCollection({map_name:statsBand, map_value:groupByImages map value, reducerName:reducer statistics})
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getstatssingleband'>
+      getStatsSingleBand
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Calculates stats for an input image grouped by another image.</p>
+
+    <div class='pre p1 fill-light mt0'>getStatsSingleBand(statsImg: ee.Image, groupByImg: ee.Image, reducerName: str, scale: int, region: ee.Geometry, crs: str): any</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>statsImg</span> <code class='quiet'>(ee.Image)</code>
+	    the image to generate stats of
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>groupByImg</span> <code class='quiet'>(ee.Image)</code>
+	    the image to group stats by
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>reducerName</span> <code class='quiet'>(str)</code>
+	    the name of the reducer to apply. currently supported:sum, count, mean
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>scale</span> <code class='quiet'>(int)</code>
+	    optional, the scale to calculate stats, defaults to 30m
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>region</span> <code class='quiet'>(ee.Geometry)</code>
+	    optional, the region to calculate stats, defaults to image bounds
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>crs</span> <code class='quiet'>(str)</code>
+	    optional, a crs for the stats defaults to epsg 4326
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        Object (ee.Dictionary)
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='setreadable'>
+      setReadable
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>adds a human readable property based on a map_value</p>
+
+    <div class='pre p1 fill-light mt0'>setReadable(fc: ee.FeatureCollection, dict: ee.Dictionary, prop: str, readable: str)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>fc</span> <code class='quiet'>(ee.FeatureCollection)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>dict</span> <code class='quiet'>(ee.Dictionary)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>prop</span> <code class='quiet'>(str)</code>
+	    The property you want to set a readable name to
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>readable</span> <code class='quiet'>(str)</code>
+	    The name of the new property to add, defaults to 'readable'
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='makefeaturesnew'>
+      makeFeaturesNew
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>organizes stats so each map value, name, and count is converted to a feature</p>
+
+    <div class='pre p1 fill-light mt0'>makeFeaturesNew(el: any, reducerName: str): any</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>el</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>reducerName</span> <code class='quiet'>(str)</code>
+	    the name of the reducer used to calculate statistics
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        ee.FeatureCollection({map_name:statsBand, map_value:groupByImages map value, reducerName:reducer statistics})
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='makehumanreadablefromvalues'>
+      makeHumanReadableFromValues
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>creates a human readable dictionary from the output of the getPixelCounts function.
+The readable name is formatted as "{description} {i}" where i is the map vlaue.
+By default description is "map value"</p>
+<p>e.g. makeHumanReadableFromValues(input, 'useful description')
+input feature collection with  a feature where map_value = 1
+outputs {1:"'useful description 1"}</p>
+
+    <div class='pre p1 fill-light mt0'>makeHumanReadableFromValues(countsFeatureCollection: ee.FeatureCollection, description: str): any</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>countsFeatureCollection</span> <code class='quiet'>(ee.FeatureCollection)</code>
+	    feature collection to add properties to
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>description</span> <code class='quiet'>(str)</code>
+	    optional, the description to concatenate with a map value, defaults to map_value
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code>any</code>:
+        ee.Dictionary({int_map_value:description_map_value})
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>
